@@ -49,6 +49,38 @@ function playRound(player, computer) {
     alert(response);
 }
 
+let playerScore = 0;
+let computerScore = 0;
+
+function playGame() {
+    // Main Loop
+    while (playerScore + computerScore < 5) { // play for 5 rounds
+        let playerOutput = getPlayerChoice();
+        if (!playerOutput) {
+            alert("No choice selected!")
+        }
+        else if (playerOutput > 3) {
+            alert("Invalid choice!")
+        }
+        else if (String(playerOutput).toLowerCase() == "stop") {
+            break
+        }
+        else {
+            playRound(playerOutput, getComputerChoice());
+        }
+    }
+
+    if (playerScore > computerScore) {
+        alert("You won the game!");
+    }
+    else {
+        alert("You lost the game!");
+    }
+}
+
+alert("Let's play!");
+playGame();
+
 /*
 Psudocode:
 
