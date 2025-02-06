@@ -13,6 +13,23 @@ function getPlayerChoice() {
     }
 }
 
+function convertChoice(choice) {
+    let choiceString;
+    switch(choice) {
+        case 1:
+            choiceString = "Rock";
+            break;
+        case 2:
+            choiceString = "Paper";
+            break;
+        case 3:
+            choiceString = "Scissors";
+            break;
+    }
+    return choiceString;
+}
+
+
 
 /*
 Psudocode:
