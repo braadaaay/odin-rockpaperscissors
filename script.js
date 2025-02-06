@@ -29,7 +29,25 @@ function convertChoice(choice) {
     return choiceString;
 }
 
-
+function playRound(player, computer) {
+    let response = "Computer choice: " + convertChoice(computer) + ", Player choice: " + convertChoice(player);
+    if (player == computer) {
+        response += "\n Draw!"; 
+    }
+    else if (player - 1 == computer || player + 2 == computer) { // player wins
+        response += "\n You won the round!";
+        playerScore++;
+    } 
+    else if (player + 1 == computer || player - 2 == computer) { // computer wins
+        response += "\n You lost the round!";
+        computerScore++;
+    } 
+    else {
+        throw "idk";
+    }
+    response += "\n Scores: " + computerScore + " (computer), " + playerScore + " (you)"; 
+    alert(response);
+}
 
 /*
 Psudocode:
