@@ -3,12 +3,20 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-    let choice = Math.ceil(parseInt(prompt(`Enter a number to play:
-        1: Rock
-        2: Paper
-        3: Scissors
-        `)));
-    if (choice != "") {
+    while (True) {
+        let choice = Math.ceil(parseInt(prompt(`Enter a number to play (or 'stop'):
+            1: Rock
+            2: Paper
+            3: Scissors
+            `)));
+
+        if (!choice) {
+            alert("No choice selected!")
+        }
+        else if (playerOutput > 3) {
+            alert("Invalid choice!")
+        }
+        
         return choice;
     }
 }
@@ -29,7 +37,12 @@ function convertChoice(choice) {
     return choiceString;
 }
 
-function playRound(player, computer) {
+function playRound(player = getPlayerChoice()) {
+    if (player === "stop") {
+        console.log("Stopping...");
+        return "stop";
+    }
+    let computer = getComputerChoice();
     let response = "Computer choice: " + convertChoice(computer) + ", Player choice: " + convertChoice(player);
     if (player == computer) {
         response += "\n Draw!"; 
@@ -43,27 +56,17 @@ function playRound(player, computer) {
         computerScore++;
     }
     response += "\n Scores: " + computerScore + " (computer), " + playerScore + " (you)"; 
-    alert(response);
+    return response;
 }
 
-let playerScore = 0;
-let computerScore = 0;
-
-function playGame() {
-    // Main Loop
+function playConsoleGame() {
+    let playerScore = 0;
+    let computerScore = 0;
+    alert("Let's play!");
     while (playerScore + computerScore < 5) { // play for 5 rounds
-        let playerOutput = getPlayerChoice();
-        if (!playerOutput) {
-            alert("No choice selected!")
-        }
-        else if (playerOutput > 3) {
-            alert("Invalid choice!")
-        }
-        else if (String(playerOutput).toLowerCase() == "stop") {
-            break
-        }
-        else {
-            playRound(playerOutput, getComputerChoice());
+        let response = playRound();
+        if (response === "stop") {
+            return;
         }
     }
 
@@ -75,5 +78,15 @@ function playGame() {
     }
 }
 
-alert("Let's play!");
-playGame();
+function playGUIGame() {
+    let playerScore = 0;
+    let computerScore = 0;
+    while (playerScore + computerScore < 5) { // play for 5 rounds
+        let response = playRound();
+        if (response === "stop") {
+            return;
+        }
+    }
+}
+
+// playConsoleGame();
